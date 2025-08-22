@@ -4,7 +4,7 @@ import os
 import math  # <-- Add this import
 
 # Installed Modules
-# None
+import pytest
 
 # Project Modules
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
@@ -46,6 +46,11 @@ def test_area_of_circle_float_radius():
     radius = 2.5
     result = area_of_circle(radius)
     assert abs(result - (math.pi * 2.5 ** 2)) < 1e-5
+
+def test_area_of_circle_negative_radius():
+    """Test with a negative radius (should raise ValueError)."""
+    with pytest.raises(ValueError):
+        area_of_circle(-1)
 
 def test_get_nth_fibonacci_three():
     """Test with n=3."""
@@ -102,3 +107,9 @@ def test_get_nth_fibonacci_ten():
 
     # Assert
     assert result == 55
+
+
+def test_get_nth_fibonacci_negative():
+    """Test with negative n (should raise ValueError)."""
+    with pytest.raises(ValueError):
+        get_nth_fibonacci(-5)
